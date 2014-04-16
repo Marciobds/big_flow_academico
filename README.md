@@ -38,13 +38,21 @@ Requisitos não funcionais do sistema:
 
   • Deve ser projetado em conformidade com uma metodologia de desenvolvimento Iterativa e Incremental
    (ex: RUP, Scrum, XP)
+   
   • Deve ser entregue, na fase de concepção, um documento de visão e um cronograma do projeto
+  
   • Deve ser entregue em 3 iterações, nas datas pré-estabelecidas
+  
   • Para cada iteração, deverão ser entregues, no mínimo, os seguintes artefatos: diagrama de casos de
        uso, descrição textual do principal caso de uso, protópido de tela do caso e uso, um diagrama adicional
          de análise, um diagrama de design, código fonte do projeto, incluíndo os testes
+  
   • Deve ser desenvolvido com a Framework Yii
+  
   • Deve usar banco de dados MySQL
+  
   • Deve utilizar design paterns no seu desenvolvimento (mínimo 2)
+  
   • Deve possuir testes para os principais casos de uso (mínimo 5)
+  
   • Deve estar disponível no GitHub
