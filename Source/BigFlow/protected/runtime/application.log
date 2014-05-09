@@ -282,3 +282,11 @@ Stack trace:
 REQUEST_URI=/index.php?r=aluno/aluno
 in /home/Marciobds/Projetos/aula/BigFlow/BigFlow/protected/controllers/aluno/AlunoController.php (125)
 in /home/Marciobds/Projetos/aula/BigFlow/BigFlow/index.php (13)
+2014/05/09 19:31:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "aluno/alunp".' in /home/Marciobds/Projetos/aula/BigFlow/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/framework/web/CWebApplication.php(141): CWebApplication->runController('aluno/alunp')
+#1 /home/Marciobds/Projetos/aula/BigFlow/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /home/Marciobds/Projetos/aula/BigFlow/BigFlow/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=aluno/alunp
+---
