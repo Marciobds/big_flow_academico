@@ -290,3 +290,58 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/index.php?r=aluno/alunp
 ---
+2014/05/11 20:12:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "=gii".' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('=gii')
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r==gii
+---
+2014/05/11 20:12:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "zii/default/index".' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('zii/default/ind...')
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=zii/default/index
+---
+2014/05/11 21:04:15 [error] [exception.CException] exception 'CException' with message 'Alias "professor.ProfessorModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php(196): YiiBase::import('professor.Profe...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModule.php(282): YiiBase::createComponent('professor.Profe...', 'professor', NULL, Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(337): CModule->getModule('professor')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(276): CWebApplication->createController('professor/profe...')
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('professor/profe...')
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=professor/professor/index
+HTTP_REFERER=http://bigflow.local/index.php?r=professor/professor/create
+---
+2014/05/11 21:05:54 [error] [exception.CException] exception 'CException' with message 'Alias "mine.gii.GiiModule" is invalid. Make sure it points to an existing directory or file.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:347
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php(196): YiiBase::import('mine.gii.GiiMod...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModule.php(282): YiiBase::createComponent('mine.gii.GiiMod...', 'gii', NULL, Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(337): CModule->getModule('gii')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(276): CWebApplication->createController('gii/crud/index')
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/default/index
+---
+2014/05/11 21:09:51 [error] [exception.CException] exception 'CException' with message 'Alias "professor.ProfessorModule" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php(196): YiiBase::import('professor.Profe...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModule.php(282): YiiBase::createComponent('professor.Profe...', 'professor', NULL, Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(337): CModule->getModule('professor')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(276): CWebApplication->createController('professor/profe...')
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('professor/profe...')
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#7 {main}
+REQUEST_URI=/index.php?r=professor/professor/index
+HTTP_REFERER=http://bigflow.local/index.php?r=professor/professor/create
+---
