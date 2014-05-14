@@ -23,7 +23,7 @@ return array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'generatorPaths'=>array(
-                'mine.gii',
+                'ext.gii',
             ),
 			'password'=>'senha',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
@@ -90,6 +90,6 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'marciobds@live.it',
 	),
-	'sourceLanguage'=>'pt-br',
-	'language'=>'pt-br',
+	'sourceLanguage'=>'pt_br',
+	'language'=>'pt_br',
 );

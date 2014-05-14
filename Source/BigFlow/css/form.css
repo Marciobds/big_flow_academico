@@ -80,6 +80,16 @@ div.form .note
 div.form span.required
 {
 	color: red;
+	width: 7px !important;
+	height: 7px !important;
+	margin: 0px 0px 3px 0;
+	overflow: hidden;
+	display: inline-block;
+}
+
+div.form span.required:before
+{
+	content: "*";
 }
 
 div.form div.error label:first-child,

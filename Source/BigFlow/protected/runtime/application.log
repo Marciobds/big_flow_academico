@@ -345,3 +345,147 @@ Stack trace:
 REQUEST_URI=/index.php?r=professor/professor/index
 HTTP_REFERER=http://bigflow.local/index.php?r=professor/professor/create
 ---
+2014/05/14 18:50:33 [error] [exception.CException] exception 'CException' with message 'Alias "professor.Professor" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(59): YiiBase::import('professor.Profe...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
+2014/05/14 19:05:23 [error] [exception.CException] exception 'CException' with message 'Alias "professor.Professor" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(59): YiiBase::import('professor.Profe...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
+2014/05/14 19:05:41 [error] [exception.CException] exception 'CException' with message 'Alias "professor.Professor" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(59): YiiBase::import('professor.Profe...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
+2014/05/14 19:06:19 [error] [exception.CException] exception 'CException' with message 'Alias "professor.Professor" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(59): YiiBase::import('professor.Profe...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
+2014/05/14 19:49:58 [error] [exception.CException] exception 'CException' with message 'Alias "aluno.models.Alunmo" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(59): YiiBase::import('aluno.models.Al...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
+2014/05/14 19:50:21 [error] [exception.CException] exception 'CException' with message 'Alias "aluno.models.Aluno" is invalid. Make sure it points to an existing PHP file and the file is readable.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/YiiBase.php:322
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(59): YiiBase::import('aluno.models.Al...', true)
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
+2014/05/14 19:50:50 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bigflow.aluno' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `aluno`.
+in /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php (13)
+2014/05/14 19:50:51 [error] [exception.CDbException] exception 'CDbException' with message 'The table "aluno" for active record class "Aluno" cannot be found in the database.' in /home/Marciobds/Projetos/aula/BigFlow/Source/framework/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Aluno))
+#1 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/db/ar/CActiveRecord.php(138): CActiveRecord->getMetaData()
+#2 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/generators/crud/CrudCode.php(66): CActiveRecord->__get('tableSchema')
+#3 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CInlineValidator.php(42): CrudCode->validateModel('model', Array)
+#4 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(CrudCode), 'model')
+#5 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CModel.php(159): CValidator->validate(Object(CrudCode), NULL)
+#6 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(159): CModel->validate()
+#7 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/gii/CCodeGenerator.php(63): CCodeGenerator->prepare()
+#8 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/actions/CInlineAction.php(49): CCodeGenerator->actionIndex()
+#9 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(282): CController->run('index')
+#13 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/crud/index')
+#14 /home/Marciobds/Projetos/aula/BigFlow/Source/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#15 /home/Marciobds/Projetos/aula/BigFlow/Source/BigFlow/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=gii/crud/index
+HTTP_REFERER=http://bigflow.local/index.php?r=gii/crud/index
+---
