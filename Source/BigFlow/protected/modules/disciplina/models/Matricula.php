@@ -1,21 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "aluno".
+ * This is the model class for table "matriculas".
  *
- * The followings are the available columns in table 'aluno':
- * @property integer $id
- * @property string $nome
- * @property string $matricula
+ * The followings are the available columns in table 'matriculas':
+ * @property integer $disciplina_id
+ * @property integer $aluno_id
  */
-class Aluno extends CActiveRecord
+class Matricula extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'alunos';
+		return 'matriculas';
 	}
 
 	/**
@@ -26,12 +25,11 @@ class Aluno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, matricula', 'required'),
-			array('nome', 'length', 'max'=>100),
-			array('matricula', 'length', 'max'=>45),
+			array('disciplina_id, aluno_id', 'required'),
+			array('disciplina_id, aluno_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nome, matricula', 'safe', 'on'=>'search'),
+			array('disciplina_id, aluno_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +41,6 @@ class Aluno extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'disciplinas' => array(self::MANY_MANY, 'Disciplina', 'matriculas(disciplina_id, aluno_id)'),
 		);
 	}
 
@@ -53,9 +50,8 @@ class Aluno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nome' => 'Nome',
-			'matricula' => 'Matrícula',
+			'disciplina_id' => 'Disciplina',
+			'aluno_id' => 'Aluno',
 		);
 	}
 
@@ -77,27 +73,8 @@ class Aluno extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('matricula',$this->matricula,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	public function searchNotEnrolled($disciplina_id) {
-
-
-		$criteria=new CDbCriteria;
-		$criteria->addCondition('disciplinas.id', $disciplina_id);
-		$enrolled_ids = CHtml::listData(Aluno::model()->with('disciplinas')->findAll($criteria), 'id', 'id');
-
-		$criteria=new CDbCriteria;
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('matricula',$this->matricula,true);
-		$criteria->addNotInCondition('id',$enrolled_ids);
+		$criteria->compare('disciplina_id',$this->disciplina_id);
+		$criteria->compare('aluno_id',$this->aluno_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -108,7 +85,7 @@ class Aluno extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Aluno the static model class
+	 * @return Matricula the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

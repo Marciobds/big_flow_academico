@@ -36,7 +36,7 @@ class DisciplinaController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete', 'add_aluno', 'delete_aluno'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -158,6 +158,46 @@ class DisciplinaController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+
+	/**
+	 * Adds a particular aluno to a particular disciplina.
+	 * If additions is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $aluno_id the ID of the model aluno to disciplina, $disciplina_id the ID of the model disciplina to add aluno to
+	 */
+	public function actionAdd_Aluno($aluno_id, $disciplina_id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('disciplina_id = '. $disciplina_id);
+		$criteria->addCondition('aluno_id = '. $aluno_id);
+		$model = Matricula::model()->find($criteria);
+		if(!$model)
+		{
+			$model = new Matricula;
+			if(Aluno::model()->findByPk($aluno_id) && Disciplina::model()->find($disciplina_id)) {
+				$model->aluno_id = $aluno_id;
+				$model->disciplina_id = $disciplina_id;
+				$model->save($model);
+			}
+		}
+		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $disciplina_id));
+	}
+
+	/**
+	 * Deletes a particular aluno from a particular disciplina.
+	 * If deletion is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $aluno_id the ID of the model aluno to disciplina, $disciplina_id the ID of the model disciplina to add aluno to
+	 */
+	public function actionDelete_Aluno($aluno_id, $disciplina_id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('disciplina_id = '. $disciplina_id);
+		$criteria->addCondition('aluno_id = '. $aluno_id);
+		$model = Matricula::model()->find($criteria);
+		if($model) {
+			$model->delete();
+		}
+		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $disciplina_id));
 	}
 
 	/**

@@ -58,7 +58,7 @@ $('.search-form form').submit(function(){
 <?php if (isset($_GET['Aluno'])) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'alunos-grid',
-		'dataProvider'=>$model_aluno->searchUnenrolled($model->id),
+		'dataProvider'=>$model_aluno->searchNotEnrolled($model->id),
 		'columns'=>array(
 			'id',
 			'nome',
