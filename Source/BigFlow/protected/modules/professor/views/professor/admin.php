@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Professor', 'url'=>array('index')),
+	array('label'=>'Listar Professores', 'url'=>array('index')),
 	array('label'=>'Cadastrar Professor', 'url'=>array('create')),
 );
 

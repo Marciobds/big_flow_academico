@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Disciplina', 'url'=>array('index')),
+	array('label'=>'Listar Disciplinas', 'url'=>array('index')),
 	array('label'=>'Cadastrar Disciplina', 'url'=>array('create')),
 	array('label'=>'Visualizar Disciplina', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Gerenciar Disciplina', 'url'=>array('admin')),

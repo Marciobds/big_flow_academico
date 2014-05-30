@@ -52,7 +52,7 @@ class DisciplinaController extends Controller
 	public function actionView($id)
 	{
 
-		$dataProvider=new CActiveDataProvider('Disciplina', array(
+		$dataProvider = new CActiveDataProvider('Disciplina', array(
 			'criteria'=>array(
 			    'with'=>array(
 			        'alunos'
@@ -66,9 +66,23 @@ class DisciplinaController extends Controller
 		if(isset($_GET['Aluno']))
 			$model_aluno->attributes=$_GET['Aluno'];
 
+		$atividadesProvider = new CActiveDataProvider('Atividade', array(
+			'criteria'=>array(
+			    'condition' => 't.disciplina_id='.$id
+			),
+		));
+
+		$aulasProvider = new CActiveDataProvider('Aula', array(
+			'criteria'=>array(
+			    'condition' => 't.disciplina_id='.$id
+			),
+		));
+
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			'dataProvider'=>$dataProvider,
+			'atividadesProvider'=>$atividadesProvider,
+			'aulasProvider'=>$aulasProvider,
 			'model_aluno'=>$model_aluno,
 		));
 	}

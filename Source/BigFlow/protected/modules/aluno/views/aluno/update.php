@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Aluno', 'url'=>array('index')),
+	array('label'=>'Listar Alunos', 'url'=>array('index')),
 	array('label'=>'Cadastrar Aluno', 'url'=>array('create')),
 	array('label'=>'Visualizar Aluno', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Gerenciar Aluno', 'url'=>array('admin')),

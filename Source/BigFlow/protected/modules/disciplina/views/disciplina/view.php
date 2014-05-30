@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Disciplina', 'url'=>array('index')),
+	array('label'=>'Listar Disciplinas', 'url'=>array('index')),
 	array('label'=>'Cadastrar Disciplina', 'url'=>array('create')),
 	array('label'=>'Atualizar Disciplina', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Deletar Disciplina', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Você tem certeza que deseja deletar este item?')),
@@ -44,7 +44,7 @@ $('.search-form form').submit(function(){
 		),
 	),
 )); ?>
-<hr />
+<br />
 
 <h3>Alunos matrículados</h3>
 <?php echo CHtml::link('Adicionar aluno','#',array('class'=>'search-button')); ?>
@@ -83,3 +83,63 @@ $('.search-form form').submit(function(){
 	'itemView'=>'_alunos',
 	'template'=>'{items}'
 )); ?>
+<br />
+<h3>Atividades da disciplina</h3>
+<?php echo CHtml::link('Adicionar atividade', array('atividade/create', 'disciplina_id'=>$model->id)); ?>
+
+<?php if (true) { // @TODO verificar se é professor logado
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'atividades-grid',
+		'dataProvider'=>$atividadesProvider,
+		'columns'=>array(
+			'atividade',
+			'peso',
+			'data',
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view}{update}{delete}',
+				'buttons' => array(
+					'view'=>array(
+						'url'=>'$this->grid->controller->createUrl("/disciplina/atividade/view", array("id"=>$data->primaryKey))',
+					),
+					'update'=>array(
+						'url'=>'$this->grid->controller->createUrl("/disciplina/atividade/update", array("id"=>$data->primaryKey))',
+					),
+					'delete'=>array(
+						'url'=>'$this->grid->controller->createUrl("/disciplina/atividade/delete", array("id"=>$data->primaryKey))',
+					)
+				)
+			),
+		),
+	));
+}
+?>
+<br />
+<h3>Aulas ministradas</h3>
+<?php echo CHtml::link('Adicionar aula', array('aula/create', 'disciplina_id'=>$model->id)); ?>
+
+<?php if (true) { // @TODO verificar se é professor logado
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'atividades-grid',
+		'dataProvider'=>$aulasProvider,
+		'columns'=>array(
+			'data',
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view}{update}{delete}',
+				'buttons' => array(
+					'view'=>array(
+						'url'=>'$this->grid->controller->createUrl("/disciplina/aula/view", array("id"=>$data->primaryKey))',
+					),
+					'update'=>array(
+						'url'=>'$this->grid->controller->createUrl("/disciplina/aula/update", array("id"=>$data->primaryKey))',
+					),
+					'delete'=>array(
+						'url'=>'$this->grid->controller->createUrl("/disciplina/aula/delete", array("id"=>$data->primaryKey))',
+					)
+				)
+			),
+		),
+	));
+}
+?>

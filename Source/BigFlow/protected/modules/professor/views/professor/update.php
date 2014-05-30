@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Professor', 'url'=>array('index')),
+	array('label'=>'Listar Professores', 'url'=>array('index')),
 	array('label'=>'Cadastrar Professor', 'url'=>array('create')),
 	array('label'=>'Visualizar Professor', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Gerenciar Professor', 'url'=>array('admin')),

@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Disciplina', 'url'=>array('index')),
+	array('label'=>'Listar Disciplinas', 'url'=>array('index')),
 	array('label'=>'Gerenciar Disciplina', 'url'=>array('admin')),
 );
 ?>

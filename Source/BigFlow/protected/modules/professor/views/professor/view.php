@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Professor', 'url'=>array('index')),
+	array('label'=>'Listar Professores', 'url'=>array('index')),
 	array('label'=>'Cadastrar Professor', 'url'=>array('create')),
 	array('label'=>'Atualizar Professor', 'url'=>array('update', 'id'=>$model->id)),
 	array('label'=>'Deletar Professor', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Você tem certeza que deseja deletar este item?')),
