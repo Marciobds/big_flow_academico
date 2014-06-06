@@ -87,11 +87,11 @@ class Aluno extends CActiveRecord
 	}
 
 	public function searchNotEnrolled($disciplina_id) {
-
-
-		$criteria=new CDbCriteria;
-		$criteria->addCondition('disciplinas.id', $disciplina_id);
-		$enrolled_ids = CHtml::listData(Aluno::model()->with('disciplinas')->findAll($criteria), 'id', 'id');
+		
+		$disciplina = Disciplina::model()->with('alunos')->findByPk($disciplina_id);
+		$enrolled_ids = array();
+		foreach($disciplina->alunos as $aluno)
+			$enrolled_ids[] = $aluno->id;
 
 		$criteria=new CDbCriteria;
 		$criteria->compare('id',$this->id);
