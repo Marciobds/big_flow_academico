@@ -185,6 +185,7 @@ class DisciplinaController extends Controller
 		$criteria->addCondition('disciplina_id = '. $disciplina_id);
 		$criteria->addCondition('aluno_id = '. $aluno_id);
 		$model = Matricula::model()->find($criteria);
+		
 		if(!$model)
 		{
 			$model = new Matricula;
