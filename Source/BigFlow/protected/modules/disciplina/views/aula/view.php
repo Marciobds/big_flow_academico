@@ -15,7 +15,7 @@ $this->menu=array(
 );
 ?>
 
-<h2>Visualizando Aula #<?php echo $model->id; ?></h2>
+<h2>Visualizando Aula de <?php echo $model->data; ?></h2>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -25,4 +25,13 @@ $this->menu=array(
 		'descricao',
 		'disciplina_id',
 	),
+)); ?>
+
+<br />
+<h2>Lista de presença</h2>
+<?php $this->widget('zii.widgets.CListView', array(
+	'id'=>'frequencia-grid',
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_frequencia',
+	'template'=>'{items}'
 )); ?>

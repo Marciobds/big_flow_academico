@@ -32,7 +32,7 @@ class AulaController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'presente', 'ausente'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,8 +51,21 @@ class AulaController extends Controller
 	 */
 	public function actionView($id)
 	{
+
+		$model = $this->loadModel($id);
+
+		$dataProvider = new CActiveDataProvider('Aula', array(
+			'criteria'=>array(
+			    'with'=>array(
+			        'frequencias'
+			    ),
+			    'condition' => 't.id='.$model->id
+			),
+		));
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'dataProvider' => $dataProvider
 		));
 	}
 
@@ -70,8 +83,26 @@ class AulaController extends Controller
 		if(isset($_POST['Aula']))
 		{
 			$model->attributes=$_POST['Aula'];
-			if($model->save())
+			if($model->save()){
+				$dataProvider = new CActiveDataProvider('Disciplina', array(
+					'criteria'=>array(
+					    'with'=>array(
+					        'alunos'
+					    ),
+					    'condition' => 't.id='.$model->disciplina_id
+					),
+				));
+				foreach($dataProvider->alunos as $aluno) {
+					$presenca = new Presenca;
+					$presenca->aluno_id = $aluno->id;
+					$presenca->aula_id = $model->id;
+					$presenca->disciplina_id = $disciplina_id;
+					$presenca->presenca = 0;
+					$presenca->save();
+					unset($presenca);
+				}
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -116,6 +147,46 @@ class AulaController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('disciplina/disciplina'));
+	}
+
+	/**
+	 * Adds a particular aluno presence to a aula.
+	 * If additions is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $aluno_id the ID of the model aluno to aula, $aula_id the ID of the model aula to add aluno to
+	 */
+	public function actionPresente($aluno_id, $aula_id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('aula_id = '. $aula_id);
+		$criteria->addCondition('aluno_id = '. $aluno_id);
+		$model = Frequencia::model()->find($criteria);
+		
+		if(!$model)
+		{
+			$model->presente = 1;
+			$model->save($model);
+		}
+		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $aula_id));
+	}
+
+	/**
+	 * Deletes a particular aluno presence from a particular aula.
+	 * If deletion is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $aluno_id the ID of the model aluno to aula, $aula_id the ID of the model aula to add aluno to
+	 */
+	public function actionAusente($aluno_id, $aula_id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('aula_id = '. $aula_id);
+		$criteria->addCondition('aluno_id = '. $aluno_id);
+		$model = Frequencia::model()->find($criteria);
+		
+		if(!$model)
+		{
+			$model->presente = 0;
+			$model->save($model);
+		}
+		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $aula_id));
 	}
 
 	/**

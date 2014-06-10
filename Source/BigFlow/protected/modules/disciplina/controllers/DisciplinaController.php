@@ -185,14 +185,31 @@ class DisciplinaController extends Controller
 		$criteria->addCondition('disciplina_id = '. $disciplina_id);
 		$criteria->addCondition('aluno_id = '. $aluno_id);
 		$model = Matricula::model()->find($criteria);
-		
 		if(!$model)
 		{
-			$model = new Matricula;
-			if(Aluno::model()->findByPk($aluno_id) && Disciplina::model()->find($disciplina_id)) {
-				$model->aluno_id = $aluno_id;
-				$model->disciplina_id = $disciplina_id;
-				$model->save($model);
+			$matricula = new Matricula;
+			if(Aluno::matricula()->findByPk($aluno_id) && Disciplina::matricula()->find($disciplina_id)) {
+				$matricula->aluno_id = $aluno_id;
+				$matricula->disciplina_id = $disciplina_id;
+				if($matricula->save($matricula)) {
+					$dataProvider = new CActiveDataProvider('Disciplina', array(
+					'criteria'=>array(
+					    'with'=>array(
+					        'alunos'
+					    ),
+					    'condition' => 't.id='.$matricula->disciplina_id
+					),
+				));
+				foreach($dataProvider->alunos as $aluno) {
+					$presenca = new Presenca;
+					$presenca->aluno_id = $aluno->id;
+					$presenca->aula_id = $matricula->id;
+					$presenca->disciplina_id = $disciplina_id;
+					$presenca->presenca = 0;
+					$presenca->save();
+					
+				}
+
 			}
 		}
 		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $disciplina_id));

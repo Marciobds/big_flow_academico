@@ -46,7 +46,8 @@ class Aula extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'disciplina' => array(self::BELONGS_TO, 'Disciplinas', 'disciplina_id'),
+			'disciplina' => array(self::BELONGS_TO, 'Disciplina', 'disciplina_id'),
+			'frequencias' => array(self::MANY_MANY, 'Aluno', 'frequencia(aula_id, aluno_id)'),
 		);
 	}
 

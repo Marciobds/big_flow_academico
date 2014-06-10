@@ -1,21 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "aluno".
+ * This is the model class for table "frequencia".
  *
- * The followings are the available columns in table 'aluno':
- * @property integer $id
- * @property string $nome
- * @property string $matricula
+ * The followings are the available columns in table 'frequencia':
+ * @property integer $aluno_id
+ * @property integer $aula_id
+ * @property integer $presente
+ * @property integer $disciplina_id
  */
-class Aluno extends CActiveRecord
+class Frequencia extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'alunos';
+		return 'frequencia';
 	}
 
 	/**
@@ -26,12 +27,11 @@ class Aluno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, matricula', 'required'),
-			array('nome', 'length', 'max'=>100),
-			array('matricula', 'length', 'max'=>45),
+			array('aluno_id, aula_id, disciplina_id', 'required'),
+			array('aluno_id, aula_id, presente, disciplina_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nome, matricula', 'safe', 'on'=>'search'),
+			array('aluno_id, aula_id, presente, disciplina_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +43,6 @@ class Aluno extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'disciplinas' => array(self::MANY_MANY, 'Disciplina', 'matriculas(disciplina_id, aluno_id)'),
 		);
 	}
 
@@ -53,9 +52,10 @@ class Aluno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'nome' => 'Nome',
-			'matricula' => 'Matrícula',
+			'aluno_id' => 'Aluno',
+			'aula_id' => 'Aula',
+			'presente' => 'Presente',
+			'disciplina_id' => 'Disciplina',
 		);
 	}
 
@@ -77,45 +77,10 @@ class Aluno extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('matricula',$this->matricula,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	public function searchNotEnrolled($disciplina_id) {
-		
-		$disciplina = Disciplina::model()->with('alunos')->findByPk($disciplina_id);
-		$enrolled_ids = array();
-		foreach($disciplina->alunos as $aluno)
-			$enrolled_ids[] = $aluno->id;
-		
-		$criteria=new CDbCriteria;
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('matricula',$this->matricula,true);
-		$criteria->addNotInCondition('id',$enrolled_ids);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
-
-	public function searchEnrolled($disciplina_id) {
-		
-		$disciplina = Disciplina::model()->with('alunos')->findByPk($disciplina_id);
-		$enrolled_ids = array();
-		foreach($disciplina->alunos as $aluno)
-			$enrolled_ids[] = $aluno->id;
-		
-		$criteria=new CDbCriteria;
-		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('matricula',$this->matricula,true);
-		$criteria->addInCondition('id',$enrolled_ids);
+		$criteria->compare('aluno_id',$this->aluno_id);
+		$criteria->compare('aula_id',$this->aula_id);
+		$criteria->compare('presente',$this->presente);
+		$criteria->compare('disciplina_id',$this->disciplina_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -126,7 +91,7 @@ class Aluno extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Aluno the static model class
+	 * @return Frequencia the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
