@@ -188,28 +188,23 @@ class DisciplinaController extends Controller
 		if(!$model)
 		{
 			$matricula = new Matricula;
-			if(Aluno::matricula()->findByPk($aluno_id) && Disciplina::matricula()->find($disciplina_id)) {
+			if(Aluno::model()->findByPk($aluno_id) && Disciplina::model()->find($disciplina_id)) {
 				$matricula->aluno_id = $aluno_id;
 				$matricula->disciplina_id = $disciplina_id;
 				if($matricula->save($matricula)) {
-					$dataProvider = new CActiveDataProvider('Disciplina', array(
-					'criteria'=>array(
-					    'with'=>array(
-					        'alunos'
-					    ),
-					    'condition' => 't.id='.$matricula->disciplina_id
-					),
-				));
-				foreach($dataProvider->alunos as $aluno) {
-					$presenca = new Presenca;
-					$presenca->aluno_id = $aluno->id;
-					$presenca->aula_id = $matricula->id;
-					$presenca->disciplina_id = $disciplina_id;
-					$presenca->presenca = 0;
-					$presenca->save();
-					
+					$criteria = new CDbCriteria;
+					$criteria->addCondition('disciplina_id = '. $matricula->disciplina_id);
+					$aulas = Aula::model()->findAll($criteria);
+					foreach($aulas as $aula) {
+						$frequencia = new Frequencia;
+						$frequencia->aluno_id = $matricula->aluno_id;
+						$frequencia->aula_id = $aula->id;
+						$frequencia->disciplina_id = $matricula->disciplina_id;
+						$frequencia->presente = 0;
+						$frequencia->save();
+		
+					}
 				}
-
 			}
 		}
 		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $disciplina_id));
@@ -228,6 +223,7 @@ class DisciplinaController extends Controller
 		$model = Matricula::model()->find($criteria);
 		if($model) {
 			$model->delete();
+			Frequencia::model()->deleteAll($criteria);
 		}
 		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $disciplina_id));
 	}

@@ -3,7 +3,7 @@
 /* @var $model Aula */
 
 $this->breadcrumbs=array(
-	'Aulas'=>array('index'),
+	'Aulas'=>array('disciplina/view', 'id' => $model->disciplina_id),
 	$model->id,
 );
 

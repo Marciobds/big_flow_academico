@@ -1,10 +1,13 @@
-<?php foreach($data->frequencias as $aluno): ?>
-	<div class="view">
-	<?php echo CHtml::encode($aluno->nome); ?>
+<?php foreach($data->frequencias as $frequencia): ?>
+	<div class="view <?php echo $frequencia->presente ? 'presente' : 'ausente'; ?>">
+	<?php echo CHtml::encode($frequencia->aluno->nome); ?>
 	
-	<?php echo CHtml::link(CHtml::encode('Presente'), array('presente', 'aluno_id' => $aluno->id, 'aula_id' => $data->id)); ?>
-	<?php echo CHtml::link(CHtml::encode('Ausente'), array('ausente', 'aluno_id' => $aluno->id, 'aula_id' => $data->id)); ?>
-	<br />
-
+	<?php 
+	if($frequencia->presente) {
+		echo CHtml::link(CHtml::encode('Ausente'), array('ausente', 'aluno_id' => $frequencia->aluno->id, 'aula_id' => $data->id));
+	} else {
+		echo CHtml::link(CHtml::encode('Presente'), array('presente', 'aluno_id' => $frequencia->aluno->id, 'aula_id' => $data->id));
+	}
+	?>
 	</div>
 <?php endforeach; ?>

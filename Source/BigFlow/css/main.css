@@ -135,6 +135,14 @@ div.view
 	border: 1px solid #C9E0ED;
 }
 
+div.view.ausente {
+	background: #f7d8da;
+}
+
+div.view.presente {
+	background: #e1f9e5;
+}
+
 div.breadcrumbs
 {
 	font-size: 0.9em;

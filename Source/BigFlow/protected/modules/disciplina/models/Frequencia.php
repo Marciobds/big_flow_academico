@@ -43,6 +43,8 @@ class Frequencia extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'aluno' => array( self::BELONGS_TO, 'Aluno', 'aluno_id' ),
+    		'aula' => array( self::BELONGS_TO, 'Aula', 'aula_id' ),
 		);
 	}
 

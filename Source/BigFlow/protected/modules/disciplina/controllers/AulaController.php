@@ -57,9 +57,9 @@ class AulaController extends Controller
 		$dataProvider = new CActiveDataProvider('Aula', array(
 			'criteria'=>array(
 			    'with'=>array(
-			        'frequencias'
+			        'frequencias' => array('with' => array('aluno'))
 			    ),
-			    'condition' => 't.id='.$model->id
+			    'condition' => 't.id='.$model->id,
 			),
 		));
 
@@ -84,22 +84,18 @@ class AulaController extends Controller
 		{
 			$model->attributes=$_POST['Aula'];
 			if($model->save()){
-				$dataProvider = new CActiveDataProvider('Disciplina', array(
-					'criteria'=>array(
-					    'with'=>array(
-					        'alunos'
-					    ),
-					    'condition' => 't.id='.$model->disciplina_id
-					),
-				));
-				foreach($dataProvider->alunos as $aluno) {
-					$presenca = new Presenca;
-					$presenca->aluno_id = $aluno->id;
-					$presenca->aula_id = $model->id;
-					$presenca->disciplina_id = $disciplina_id;
-					$presenca->presenca = 0;
-					$presenca->save();
-					unset($presenca);
+				$criteria = new CDbCriteria;
+				$criteria->addCondition('t.id = '. $disciplina_id);
+				$criteria->with = array('alunos');
+				$disciplina = Disciplina::model()->find($criteria);
+				foreach($disciplina->alunos as $aluno) {
+					$frequencia = new Frequencia;
+					$frequencia->aluno_id = $aluno->id;
+					$frequencia->aula_id = $model->id;
+					$frequencia->disciplina_id = $disciplina_id;
+					$frequencia->presente = 0;
+					$frequencia->save();
+					unset($frequencia);
 				}
 				$this->redirect(array('view','id'=>$model->id));
 			}
@@ -142,11 +138,12 @@ class AulaController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model=$this->loadModel($id);
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('disciplina/disciplina'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('disciplina/disciplina/view'. 'id' => $model->disciplina_id));
 	}
 
 	/**
@@ -157,11 +154,10 @@ class AulaController extends Controller
 	public function actionPresente($aluno_id, $aula_id)
 	{
 		$criteria = new CDbCriteria;
-		$criteria->addCondition('aula_id = '. $aula_id);
-		$criteria->addCondition('aluno_id = '. $aluno_id);
+		$criteria->addCondition('aula_id='. $aula_id);
+		$criteria->addCondition('aluno_id='. $aluno_id);
 		$model = Frequencia::model()->find($criteria);
-		
-		if(!$model)
+		if($model)
 		{
 			$model->presente = 1;
 			$model->save($model);
@@ -181,7 +177,7 @@ class AulaController extends Controller
 		$criteria->addCondition('aluno_id = '. $aluno_id);
 		$model = Frequencia::model()->find($criteria);
 		
-		if(!$model)
+		if($model)
 		{
 			$model->presente = 0;
 			$model->save($model);
