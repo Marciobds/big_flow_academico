@@ -32,7 +32,7 @@ class AtividadeController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'nota'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,8 +51,20 @@ class AtividadeController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+
+		$dataProvider = new CActiveDataProvider('Atividade', array(
+			'criteria'=>array(
+			    'with'=>array(
+			        'notas' => array('with' => array('aluno'))
+			    ),
+			    'condition' => 't.id='.$model->id,
+			),
+		));
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'dataProvider' => $dataProvider
 		));
 	}
 
@@ -70,8 +82,22 @@ class AtividadeController extends Controller
 		if(isset($_POST['Atividade']))
 		{
 			$model->attributes=$_POST['Atividade'];
-			if($model->save())
+			if($model->save()){
+				$criteria = new CDbCriteria;
+				$criteria->addCondition('t.id = '. $model->disciplina_id);
+				$criteria->with = array('alunos');
+				$disciplina = Disciplina::model()->find($criteria);
+				foreach($disciplina->alunos as $aluno) {
+					$nota = new Nota;
+					$nota->aluno_id = $aluno->id;
+					$nota->atividade_id = $model->id;
+					$nota->disciplina_id = $model->disciplina_id;
+					$nota->nota = 0;
+					$nota->save();
+					unset($nota);
+				}
 				$this->redirect(array('disciplina/view','id'=>$model->disciplina_id));
+			}
 		}
 
 		$this->render('create',array(
@@ -116,6 +142,33 @@ class AtividadeController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('disciplina/disciplina'));
+	}
+
+	public function actionNota($aluno_id, $atividade_id)
+	{
+    	$criteria = new CDbCriteria;
+		$criteria->addCondition('aluno_id = '. $aluno_id);
+		$criteria->addCondition('atividade_id = '. $atividade_id);
+	    $model = Nota::model()->find($criteria);
+
+	    // uncomment the following code to enable ajax-based validation
+	    /*
+	    if(isset($_POST['ajax']) && $_POST['ajax']==='nota-nota-form')
+	    {
+	        echo CActiveForm::validate($model);
+	        Yii::app()->end();
+	    }
+	    */
+
+	    if(isset($_POST['Nota']))
+	    {
+	        $model->attributes=$_POST['Nota'];
+	        if($model->save())
+	        {
+	        	$this->redirect(array('view','id'=>$model->atividade_id));   
+	        }
+	    }
+	    $this->render('nota',array('model'=>$model));
 	}
 
 	/**

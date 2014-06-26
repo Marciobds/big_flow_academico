@@ -204,6 +204,16 @@ class DisciplinaController extends Controller
 						$frequencia->save();
 		
 					}
+					$atividades = Atividade::model()->findAll($criteria);
+					foreach($atividades as $atividade) {
+						$nota = new Frequencia;
+						$nota->aluno_id = $matricula->aluno_id;
+						$nota->atividade_id = $atividade->id;
+						$nota->disciplina_id = $matricula->disciplina_id;
+						$nota->nota = 0;
+						$nota->save();
+		
+					}
 				}
 			}
 		}

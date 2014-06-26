@@ -1,27 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "atividades".
+ * This is the model class for table "notas".
  *
- * The followings are the available columns in table 'atividades':
- * @property integer $id
- * @property string $atividade
- * @property string $descricao
- * @property string $data
- * @property double $peso
+ * The followings are the available columns in table 'notas':
+ * @property integer $atividade_id
+ * @property integer $aluno_id
+ * @property double $nota
  * @property integer $disciplina_id
- *
- * The followings are the available model relations:
- * @property Disciplinas $disciplina
  */
-class Atividade extends CActiveRecord
+class Nota extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'atividades';
+		return 'notas';
 	}
 
 	/**
@@ -32,14 +27,12 @@ class Atividade extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('atividade, data, disciplina_id', 'required'),
-			array('disciplina_id', 'numerical', 'integerOnly'=>true),
-			array('peso', 'numerical'),
-			array('atividade', 'length', 'max'=>100),
-			array('descricao', 'safe'),
+			array('atividade_id, aluno_id, nota, disciplina_id', 'required'),
+			array('atividade_id, aluno_id, disciplina_id', 'numerical', 'integerOnly'=>true),
+			array('nota', 'numerical'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, atividade, descricao, data, peso, disciplina_id', 'safe', 'on'=>'search'),
+			array('atividade_id, aluno_id, nota, disciplina_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,9 +44,9 @@ class Atividade extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'disciplina' => array(self::BELONGS_TO, 'Disciplinas', 'disciplina_id'),
-			'alunos' => array(self::MANY_MANY, 'Aluno', 'notas(atividade_id, aluno_id)'),
-			'notas' => array(self::HAS_MANY, 'Nota', 'atividade_id'),
+			'aluno' => array( self::BELONGS_TO, 'Aluno', 'aluno_id' ),
+    		'atividade' => array( self::BELONGS_TO, 'Atividade', 'atividade_id' ),
+    		'disciplina' => array( self::BELONGS_TO, 'Disciplina', 'disciplina_id' ),
 		);
 	}
 
@@ -63,11 +56,9 @@ class Atividade extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'atividade' => 'Atividade',
-			'descricao' => 'Descrição',
-			'data' => 'Data',
-			'peso' => 'Peso',
+			'atividade_id' => 'Atividade',
+			'aluno_id' => 'Aluno',
+			'nota' => 'Nota',
 			'disciplina_id' => 'Disciplina',
 		);
 	}
@@ -90,11 +81,9 @@ class Atividade extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('atividade',$this->atividade,true);
-		$criteria->compare('descricao',$this->descricao,true);
-		$criteria->compare('data',$this->data,true);
-		$criteria->compare('peso',$this->peso);
+		$criteria->compare('atividade_id',$this->atividade_id);
+		$criteria->compare('aluno_id',$this->aluno_id);
+		$criteria->compare('nota',$this->nota);
 		$criteria->compare('disciplina_id',$this->disciplina_id);
 
 		return new CActiveDataProvider($this, array(
@@ -106,7 +95,7 @@ class Atividade extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Atividade the static model class
+	 * @return Nota the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

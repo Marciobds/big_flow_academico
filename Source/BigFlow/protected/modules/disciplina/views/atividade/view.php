@@ -29,3 +29,12 @@ $this->menu=array(
 		'disciplina_id',
 	),
 )); ?>
+
+<br />
+<h2>Notas dos Alunos</h2>
+<?php $this->widget('zii.widgets.CListView', array(
+	'id'=>'notas-grid',
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_notas',
+	'template'=>'{items}'
+)); ?>
