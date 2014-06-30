@@ -21,9 +21,13 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'data',
+		'aula',
+		array(      
+            'name'=>'data',
+            'value'=>Yii::app()->dateFormatter->format('dd/MM/y', $model->data),
+        ),
 		'descricao',
-		'disciplina_id',
+		'disciplina.disciplina',
 	),
 )); ?>
 

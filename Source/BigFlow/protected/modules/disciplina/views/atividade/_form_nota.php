@@ -2,6 +2,7 @@
 /* @var $this NotaController */
 /* @var $model Nota */
 /* @var $form CActiveForm */
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
 <div class="form">
@@ -15,25 +16,26 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos com <span class="required">obrigatório</span> são obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'disciplina'); ?>
+		<?php echo $form->textField($model,'disciplina', array('value' => $model->disciplina->disciplina, 'disabled' => 'disabled')); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'atividade'); ?>
-		<?php echo $form->textField($model,'atividade', array('value' => $model->atividade->atividade)); ?>
+		<?php echo $form->textField($model,'atividade', array('value' => $model->atividade->atividade, 'disabled' => 'disabled')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'aluno'); ?>
-		<?php echo $form->textField($model,'aluno', array('value' => $model->aluno->nome)); ?>
+		<?php echo $form->textField($model,'aluno', array('value' => $model->aluno->nome, 'disabled' => 'disabled')); ?>
 	</div>
 
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'disciplina'); ?>
-		<?php echo $form->textField($model,'disciplina', array('value' => $model->disciplina->disciplina)); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nota'); ?>

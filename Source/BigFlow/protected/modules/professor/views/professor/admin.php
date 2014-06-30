@@ -3,12 +3,10 @@
 /* @var $model Professor */
 
 $this->breadcrumbs=array(
-	'Professors'=>array('index'),
-	'Gerenciar',
+	'Professores',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Professores', 'url'=>array('index')),
 	array('label'=>'Cadastrar Professor', 'url'=>array('create')),
 );
 
@@ -26,7 +24,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h2>Gerenciar Professors</h2>
+<h2>Gerenciar Professores</h2>
 
 <p>
 Você pode informar um operador de comparação (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -45,6 +43,7 @@ ou <b>=</b>) no início de cada um de seus valores de busca para especificar com
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
+		
 		'id',
 		'nome',
 		array(

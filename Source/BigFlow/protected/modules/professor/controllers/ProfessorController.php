@@ -27,17 +27,9 @@ class ProfessorController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+			array('allow',
+				'actions'=>array('create','update', 'view', 'admin','delete'),
+				'expression'=>'Yii::app()->user->isAdmin()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -63,6 +55,7 @@ class ProfessorController extends Controller
 	public function actionCreate()
 	{
 		$model=new Professor;
+		$usuario=new Usuario;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -70,12 +63,17 @@ class ProfessorController extends Controller
 		if(isset($_POST['Professor']))
 		{
 			$model->attributes=$_POST['Professor'];
-			if($model->save())
+			$usuario->attributes=$_POST['Usuario'];
+			if($model->validate() && $usuario->validate()) {
+				$model->save();
+				$usuario->save();
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'usuario'=>$usuario,
 		));
 	}
 
@@ -87,7 +85,6 @@ class ProfessorController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -115,17 +112,6 @@ class ProfessorController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Professor');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
 	}
 
 	/**

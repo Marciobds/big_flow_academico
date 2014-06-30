@@ -2,6 +2,9 @@
 /* @var $this AulaController */
 /* @var $model Aula */
 /* @var $form CActiveForm */
+Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
 <div class="form">
@@ -26,8 +29,23 @@
 	?>
 
 	<fieldset class="row">
+		<?php echo $form->labelEx($model,'aula'); ?>
+		<?php echo $form->textField($model,'aula'); ?>
+		<?php echo $form->error($model,'aula'); ?>
+	</fieldset>
+
+	<fieldset class="row">
 		<?php echo $form->labelEx($model,'data'); ?>
-		<?php echo $form->textField($model,'data'); ?>
+		<?php $this->widget('CJuiDateTimePicker',array(
+                'language'=>'pt-BR',
+                'model'=>$model, // Model object
+                'attribute'=>'data', // Attribute name
+                'mode'=>'date', // Use "time","date" or "datetime" (default)
+                'options'=>array( // jquery plugin options
+                	'dateFormat'=> 'yy-mm-dd'
+                ),
+                'htmlOptions'=>array('readonly'=>true), // HTML options
+        )); ?>
 		<?php echo $form->error($model,'data'); ?>
 	</fieldset>
 

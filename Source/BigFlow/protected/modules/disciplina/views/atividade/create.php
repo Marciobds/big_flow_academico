@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Disciplinas'=>array('disciplina/index'),
-	'Atividades'=>array('index', 'disciplina_id'=>$disciplina->id),
+	'Atividades'=>array('disciplina/view', 'id'=>$disciplina->id),
 	'Cadastrar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Atividads', 'url'=>array('disciplina/view', 'id'=>$disciplina->id)),
+	array('label'=>'Listar Atividades', 'url'=>array('disciplina/view', 'id'=>$disciplina->id)),
 );
 ?>
 
-<h1>Create Atividade</h1>
+<h2>Cadastro de Atividade</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model, 'disciplina'=>$disciplina)); ?>

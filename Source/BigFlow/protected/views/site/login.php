@@ -7,9 +7,10 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
 	'Login',
 );
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
-<h1>Login</h1>
+<h2>Login</h2>
 
 <p>Please fill out the following form with your login credentials:</p>
 
@@ -22,7 +23,7 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos com <span class="required">obrigatório</span> são obrigatórios.</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>

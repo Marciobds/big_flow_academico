@@ -22,6 +22,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create <?php echo $this->modelClass; ?></h1>
+<h2>Cadastro de <?php echo $this->modelClass; ?></h2>
 
 <?php echo "<?php \$this->renderPartial('_form', array('model'=>\$model)); ?>"; ?>

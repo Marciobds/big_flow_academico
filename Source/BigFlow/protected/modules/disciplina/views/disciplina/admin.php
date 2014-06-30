@@ -3,12 +3,10 @@
 /* @var $model Disciplina */
 
 $this->breadcrumbs=array(
-	'Disciplinas'=>array('index'),
-	'Gerenciar',
+	'Disciplinas',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Disciplinas', 'url'=>array('index')),
 	array('label'=>'Cadastrar Disciplina', 'url'=>array('create')),
 );
 

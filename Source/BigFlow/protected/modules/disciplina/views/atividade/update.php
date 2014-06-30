@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Disciplinas'=>array('disciplina/index'),
-	'Atividades'=>array('index', 'disciplina_id'=>$model->disciplina_id),
+	'Atividades'=>array('disciplina/view', 'id'=>$model->disciplina_id),
 	$model->atividade=>array('view','id'=>$model->id),
 	'Atualizar',
 );
@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h2>Atualizando Atividade <?php echo $model->id; ?></h2>
+<h2>Atualizando Atividade: <?php echo $model->atividade; ?></h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

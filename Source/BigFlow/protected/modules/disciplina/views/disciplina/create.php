@@ -3,16 +3,15 @@
 /* @var $model Disciplina */
 
 $this->breadcrumbs=array(
-	'Disciplinas'=>array('index'),
+	'Disciplinas'=>array('admin'),
 	'Cadastrar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Disciplinas', 'url'=>array('index')),
-	array('label'=>'Gerenciar Disciplina', 'url'=>array('admin')),
+	array('label'=>'Listar Disciplinas', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Disciplina</h1>
+<h2>Cadastro de Disciplina</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

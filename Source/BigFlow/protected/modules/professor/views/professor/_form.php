@@ -2,6 +2,7 @@
 /* @var $this ProfessorController */
 /* @var $model Professor */
 /* @var $form CActiveForm */
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
 <div class="form">
@@ -24,6 +25,8 @@
 		<?php echo $form->textField($model,'nome',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'nome'); ?>
 	</fieldset>
+
+	<?php if($model->isNewRecord) $this->renderPartial('_form_user', array('usuario'=>$usuario, 'form' => $form)); ?>
 
 	<fieldset class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Cadastrar' : 'Atualizar'); ?>

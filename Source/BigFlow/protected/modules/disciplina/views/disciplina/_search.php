@@ -2,6 +2,7 @@
 /* @var $this DisciplinaController */
 /* @var $model Disciplina */
 /* @var $form CActiveForm */
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
 <div class="wide form">

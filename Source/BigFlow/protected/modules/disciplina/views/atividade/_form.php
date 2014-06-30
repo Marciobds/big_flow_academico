@@ -2,6 +2,8 @@
 /* @var $this AtividadeController */
 /* @var $model Atividade */
 /* @var $form CActiveForm */
+Yii::import('application.extensions.CJuiDateTimePicker.CJuiDateTimePicker');
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
 <div class="form">
@@ -32,16 +34,26 @@
 	</fieldset>
 
 	<fieldset class="row">
+		<?php echo $form->labelEx($model,'data'); ?>
+		<?php $this->widget('CJuiDateTimePicker',array(
+                'language'=>'pt-BR',
+                'model'=>$model, // Model object
+                'attribute'=>'data', // Attribute name
+                'mode'=>'date', // Use "time","date" or "datetime" (default)
+                'options'=>array( // jquery plugin options
+                	'dateFormat'=> 'yy-mm-dd'
+                ),
+                'htmlOptions'=>array('readonly'=>true), // HTML options
+        )); ?>
+		<?php echo $form->error($model,'data'); ?>
+	</fieldset>
+
+	<fieldset class="row">
 		<?php echo $form->labelEx($model,'descricao'); ?>
 		<?php echo $form->textArea($model,'descricao',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'descricao'); ?>
 	</fieldset>
 
-	<fieldset class="row">
-		<?php echo $form->labelEx($model,'data'); ?>
-		<?php echo $form->textField($model,'data'); ?>
-		<?php echo $form->error($model,'data'); ?>
-	</fieldset>
 
 	<fieldset class="row">
 		<?php echo $form->labelEx($model,'peso'); ?>

@@ -135,12 +135,24 @@ div.view
 	border: 1px solid #C9E0ED;
 }
 
-div.view.ausente {
+div.view.alunos a
+{
+	float: right;
+}
+
+div.view.ausente
+{
 	background: #f7d8da;
 }
 
-div.view.presente {
+div.view.presente
+{
 	background: #e1f9e5;
+}
+
+div.view.presente a, div.view.ausente a
+{
+	float: right;
 }
 
 div.breadcrumbs

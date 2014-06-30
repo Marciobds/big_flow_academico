@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Disciplinas'=>array('disciplina/index'),
-	'Aulas'=>array('index', 'disciplina_id'=>$model->disciplina_id),
+	'Aulas'=>array('disciplina/view', 'id'=>$model->disciplina_id),
 	$model->data=>array('view','id'=>$model->id),
 	'Atualizar',
 );

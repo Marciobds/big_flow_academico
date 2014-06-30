@@ -51,7 +51,7 @@ class Atividade extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'disciplina' => array(self::BELONGS_TO, 'Disciplinas', 'disciplina_id'),
+			'disciplina' => array(self::BELONGS_TO, 'Disciplina', 'disciplina_id'),
 			'alunos' => array(self::MANY_MANY, 'Aluno', 'notas(atividade_id, aluno_id)'),
 			'notas' => array(self::HAS_MANY, 'Nota', 'atividade_id'),
 		);

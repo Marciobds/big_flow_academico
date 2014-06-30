@@ -3,12 +3,10 @@
 /* @var $model Aluno */
 
 $this->breadcrumbs=array(
-	'Alunos'=>array('index'),
-	'Gerenciar',
+	'Alunos',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Alunos', 'url'=>array('index')),
 	array('label'=>'Cadastrar Aluno', 'url'=>array('create')),
 );
 

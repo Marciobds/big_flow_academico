@@ -7,7 +7,21 @@
  */
 class UserIdentity extends CUserIdentity
 {
-	/**
+	private $_id;
+	private $_username;
+	private $_admin;
+ 
+	public function getName()
+	{
+		return $this->_username;
+	}
+ 
+	public function getId()
+	{
+		return $this->_id;
+	}
+ 
+ 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
 	 * are both 'demo'.
@@ -17,17 +31,21 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
+		$usuario = Usuario::model()->find('email=?', array($this->username));
+
+		if($usuario === null) {
+			$this->errorCode= self::ERROR_UNKNOWN_IDENTITY;
+		} elseif($usuario->senha !== md5($this->password)) {
+			$this->errorCode= self::ERROR_PASSWORD_INVALID;
+		} else {
+			$this->_id = $usuario->id;
+			$this->_username = $usuario->email;
+			
+			if($usuario->professor_id != null)
+				$this->_username = $usuario->professor->nome;
+
+			$this->errorCode= self::ERROR_NONE;
+		}
 		return !$this->errorCode;
 	}
 }

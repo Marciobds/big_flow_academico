@@ -1,20 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "professores".
+ * This is the model class for table "usuarios".
  *
- * The followings are the available columns in table 'professores':
+ * The followings are the available columns in table 'usuarios':
  * @property integer $id
- * @property string $nome
+ * @property string $email
+ * @property string $senha
+ * @property integer $professor_id
+ * @property integer $admin
+ *
+ * The followings are the available model relations:
+ * @property Professores $professor
  */
-class Professor extends CActiveRecord
+class Usuario extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'professores';
+		return 'usuarios';
 	}
 
 	/**
@@ -25,11 +31,12 @@ class Professor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome', 'required'),
-			array('nome', 'length', 'max'=>100),
+			array('email, senha', 'required'),
+			array('professor_id, admin', 'numerical', 'integerOnly'=>true),
+			array('email, senha', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nome', 'safe', 'on'=>'search'),
+			array('id, email, senha, professor_id, admin', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -38,11 +45,11 @@ class Professor extends CActiveRecord
 	 */
 	public function relations()
 	{
-		Yii::import('application.models.Usuario');
+		Yii::import('application.modules.professor.models.Professor');
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'usuario' => array(self::HAS_ONE, 'Usuario', 'professor_id'),
+			'professor' => array(self::BELONGS_TO, 'Professor', 'professor_id'),
 		);
 	}
 
@@ -53,7 +60,10 @@ class Professor extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'nome' => 'Nome',
+			'email' => 'Email',
+			'senha' => 'Senha',
+			'professor_id' => 'Professor',
+			'admin' => 'Admin',
 		);
 	}
 
@@ -76,7 +86,10 @@ class Professor extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('nome',$this->nome,true);
+		$criteria->compare('email',$this->email,true);
+		$criteria->compare('senha',$this->senha,true);
+		$criteria->compare('professor_id',$this->professor_id);
+		$criteria->compare('admin',$this->admin);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -87,10 +100,19 @@ class Professor extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Professor the static model class
+	 * @return Usuario the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function beforeSave()
+	{
+		if($this->senha != '') {
+			$senha = md5($this->senha);
+			$this->senha = $senha;
+		}
+		return true;
 	}
 }

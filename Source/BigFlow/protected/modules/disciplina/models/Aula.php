@@ -30,11 +30,11 @@ class Aula extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('data, descricao, disciplina_id', 'required'),
+			array('aula, data, descricao, disciplina_id', 'required'),
 			array('disciplina_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, data, descricao, disciplina_id', 'safe', 'on'=>'search'),
+			array('id, aula, data, descricao, disciplina_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +59,7 @@ class Aula extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'aula' => 'Aula',
 			'data' => 'Data',
 			'descricao' => 'Descrição',
 			'disciplina_id' => 'Disciplina',
@@ -84,6 +85,7 @@ class Aula extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('aula',$this->aula,true);
 		$criteria->compare('data',$this->data,true);
 		$criteria->compare('descricao',$this->descricao,true);
 		$criteria->compare('disciplina_id',$this->disciplina_id);

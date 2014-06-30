@@ -4,8 +4,8 @@
 
 $this->breadcrumbs=array(
 	'Disciplinas'=>array('disciplina/index'),
-	'Atividades'=>array('index', 'disciplina_id'=>$model->disciplina_id),
-	$model->id,
+	'Atividades'=>array('disciplina/view', 'id'=>$model->disciplina_id),
+	$model->atividade,
 );
 
 $this->menu=array(
@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h2>Visualizando Atividade #<?php echo $model->id; ?></h2>
+<h2>Visualizando Atividade: <?php echo $model->atividade; ?></h2>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -24,17 +24,15 @@ $this->menu=array(
 		'id',
 		'atividade',
 		'descricao',
-		'data',
+		array(      
+            'name'=>'data',
+            'value'=>Yii::app()->dateFormatter->format('dd/MM/y', $model->data),
+        ),
 		'peso',
-		'disciplina_id',
+		'disciplina.disciplina',
 	),
 )); ?>
 
 <br />
 <h2>Notas dos Alunos</h2>
-<?php $this->widget('zii.widgets.CListView', array(
-	'id'=>'notas-grid',
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_notas',
-	'template'=>'{items}'
-)); ?>
+<?php $this->renderPartial('_notas', array('data'=>$model)); ?>

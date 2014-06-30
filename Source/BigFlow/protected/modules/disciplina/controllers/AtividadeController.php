@@ -27,17 +27,9 @@ class AtividadeController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'nota'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('create', 'delete', 'update', 'view', 'nota'),
+				'expression'=>'Yii::app()->user->isProfessor()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -53,18 +45,8 @@ class AtividadeController extends Controller
 	{
 		$model = $this->loadModel($id);
 
-		$dataProvider = new CActiveDataProvider('Atividade', array(
-			'criteria'=>array(
-			    'with'=>array(
-			        'notas' => array('with' => array('aluno'))
-			    ),
-			    'condition' => 't.id='.$model->id,
-			),
-		));
-
 		$this->render('view',array(
 			'model'=>$model,
-			'dataProvider' => $dataProvider
 		));
 	}
 
@@ -96,7 +78,7 @@ class AtividadeController extends Controller
 					$nota->save();
 					unset($nota);
 				}
-				$this->redirect(array('disciplina/view','id'=>$model->disciplina_id));
+				$this->redirect(array('atividade/view','id'=>$model->id));
 			}
 		}
 
@@ -122,7 +104,7 @@ class AtividadeController extends Controller
 		{
 			$model->attributes=$_POST['Atividade'];
 			if($model->save())
-				$this->redirect(array('disciplina/view','id'=>$model->disciplina_id));
+				$this->redirect(array('atividade/view','id'=>$model->id));
 		}
 
 		$this->render('update',array(

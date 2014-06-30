@@ -7,9 +7,10 @@ $this->pageTitle=Yii::app()->name . ' - Contact Us';
 $this->breadcrumbs=array(
 	'Contact',
 );
+CHtml::$afterRequiredLabel = '<span class="required">obrigatório</span>';
 ?>
 
-<h1>Contact Us</h1>
+<h2>Contact Us</h2>
 
 <?php if(Yii::app()->user->hasFlash('contact')): ?>
 
@@ -33,7 +34,7 @@ If you have business inquiries or other questions, please fill out the following
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos com <span class="required">obrigatório</span> são obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 

@@ -27,17 +27,13 @@ class DisciplinaController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin', 'create', 'update', 'view', 'delete', 'add_aluno', 'delete_aluno'),
+				'expression'=>'Yii::app()->user->isAdmin()',
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'add_aluno', 'delete_aluno'),
-				'users'=>array('admin'),
+				'actions'=>array('index', 'view', 'aluno'),
+				'expression'=>'Yii::app()->user->isProfessor()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -153,7 +149,9 @@ class DisciplinaController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Disciplina');
+		$criteria = new CDbCriteria;
+		$criteria->addCondition('professor_id = '. Yii::app()->user->getProfessor()->id);
+		$dataProvider=new CActiveDataProvider('Disciplina', array('criteria'=>$criteria));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -206,7 +204,7 @@ class DisciplinaController extends Controller
 					}
 					$atividades = Atividade::model()->findAll($criteria);
 					foreach($atividades as $atividade) {
-						$nota = new Frequencia;
+						$nota = new Nota;
 						$nota->aluno_id = $matricula->aluno_id;
 						$nota->atividade_id = $atividade->id;
 						$nota->disciplina_id = $matricula->disciplina_id;
@@ -236,6 +234,34 @@ class DisciplinaController extends Controller
 			Frequencia::model()->deleteAll($criteria);
 		}
 		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('view', 'id' => $disciplina_id));
+	}
+
+	public function actionAluno($aluno_id, $disciplina_id)
+	{
+		$aluno = Aluno::model()->findByPk($aluno_id);
+		$disciplina = Disciplina::model()->findByPk($disciplina_id);
+		
+		$notasProvider = new CActiveDataProvider('Nota', array(
+			'criteria'=>array(
+			    'condition' => 't.disciplina_id='.$disciplina_id,
+			    'condition' => 't.aluno_id='.$aluno_id
+			),
+		));
+
+		$frequenciaProvider = new CActiveDataProvider('Frequencia', array(
+			'criteria'=>array(
+			    'condition' => 't.disciplina_id='.$disciplina_id,
+			    'condition' => 't.aluno_id='.$aluno_id
+			),
+		));
+
+		$this->render('aluno',array(
+			'aluno'=>$aluno,
+			'disciplina'=>$disciplina,
+			'notasProvider'=>$notasProvider,
+			'frequenciaProvider'=>$frequenciaProvider
+		));
+
 	}
 
 	/**

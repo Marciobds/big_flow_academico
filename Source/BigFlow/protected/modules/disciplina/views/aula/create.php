@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Aula</h1>
+<h2>Cadastro de Aula</h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model, 'disciplina'=>$disciplina)); ?>
